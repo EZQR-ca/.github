@@ -26,7 +26,16 @@ jobs:
   docker-containers:
     name: Verify docker containers
     runs-on: ubuntu-latest
+    permissions:
+      packages: read
     steps:
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Pull containers
         run: |
           docker pull ghcr.io/ezqr-ca/ezqr-container
