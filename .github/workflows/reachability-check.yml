@@ -1,0 +1,31 @@
+name: Reachability Check
+
+on:
+  schedule:
+    - cron: '0 12 * * *'
+  workflow_dispatch:
+
+jobs:
+  npm-packages:
+    name: Verify npm packages
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install packages
+        run: |
+          mkdir -p reachability-check
+          cd reachability-check
+          npm init -y
+          npm install ezqr-astro ezqr-vue ezqr-embed
+
+  docker-containers:
+    name: Verify docker containers
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pull containers
+        run: |
+          docker pull ghcr.io/ezqr-ca/ezqr-container
