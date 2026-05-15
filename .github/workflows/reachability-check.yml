@@ -38,4 +38,4 @@ jobs:
 
       - name: Pull containers
         run: |
-          docker pull ghcr.io/ezqr-ca/ezqr-container
+          docker pull ghcr.io/ezqr-ca/ezqr-container:latest
